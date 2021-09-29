@@ -63,6 +63,6 @@ app.get('/GetDepartments', async (req, res) => {
 https.createServer({
     key: fs.readFileSync('cert/server.key'),
     cert: fs.readFileSync('cert/server.cert')
-}, app).listen(80);
+}, app).listen(process.env.PORT || 3000);
 
 //01250145
