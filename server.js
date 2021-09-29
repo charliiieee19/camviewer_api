@@ -64,6 +64,6 @@ app.get('/GetDepartments', async (req, res) => {
 //    key: fs.readFileSync('cert/server.key'),
 //    cert: fs.readFileSync('cert/server.cert')
 //}, app).listen(process.env.PORT || 3000);
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 //01250145
