@@ -30,7 +30,7 @@ app.post('/GetUsers', async (req, res) => {
 app.post('/GetUserTK', async (req, res) => {
     const result = await ExecuteQuery(`
         SELECT 
-            a.DateCreated,
+            CONVERT(varchar(MAX),a.DateCreated,0) AS [DateCreated],
             a.TranID,
             a.UserID,
             a.TrackID
