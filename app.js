@@ -39,6 +39,7 @@ app.post('/GetUserTK', async (req, res) => {
         ON a.UserID = b.UserID
         WHERE b.UserID = '${req.body.UserID}'
         AND CONVERT(varchar,a.DateCreated,23) = '${req.body.Date}'
+        ORDER BY a.DateCreated ASC
     `);
 
     res.send(result);
