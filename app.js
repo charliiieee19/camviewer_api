@@ -99,6 +99,6 @@ app.get('/GetDepartments', async (req, res) => {
     res.send(result);
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT);
 
 //01250145
