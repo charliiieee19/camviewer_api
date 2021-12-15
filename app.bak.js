@@ -10,22 +10,6 @@ app.use(express.urlencoded({ extended: true, limit: '50mb', parameterLimit: 5000
 app.use(express.json({ extended: true, limit: '50mb' }));
 app.use(cors());
 
-app.get('/GetUsers1', async (req, res) => {
-    const result = await ExecuteQuery(`
-        SELECT DISTINCT TOp 100
-            a.UserID,
-            CONCAT(b.LastName,', ',b.FirstName,' ',b.MiddleName) AS [Name],
-            CONVERT(varchar(50),b.BirthDate,23) AS [BirthDate],
-            b.Gender
-        FROM AWSLINK.Workfromhome.dbo.WorkfromhomeWebcam a
-        LEFT JOIN EmpMaster_Copy b
-            ON a.UserID = b.UserID
-        ORDER BY CONCAT(b.LastName,', ',b.FirstName,' ',b.MiddleName) ASC
-    `);
-
-    res.send(result);
-});
-
 app.post('/GetUsers', async (req, res) => {
     const result = await ExecuteQuery(`
         SELECT DISTINCT
@@ -73,18 +57,6 @@ app.post('/GetUserWebCam', async (req, res) => {
     res.send(result);
 });
 
-app.post('/GetUserScreenshot', async (req, res) => {
-    const result = await ExecuteQuery(`
-        SELECT a.FileData
-        FROM AWSLINK.Workfromhome.dbo.Workfromhome a
-        LEFT JOIN EmpMaster_Copy b
-        ON a.UserID = b.UserID
-        WHERE a.TrackID = '${req.body.TrackID}'
-    `);
-
-    res.send(result);
-});
-
 app.get('/GetDepartments', async (req, res) => {
     const result = await ExecuteQuery(`
         SELECT DISTINCT 
@@ -98,6 +70,7 @@ app.get('/GetDepartments', async (req, res) => {
 
     res.send(result);
 });
+
 
 app.listen(process.env.PORT || 3000);
 
