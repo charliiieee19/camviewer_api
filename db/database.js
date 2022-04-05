@@ -14,6 +14,7 @@ const sqlConfig = {
         encrypt: true,
         trustServerCertificate: true
     },
+    requestTimeout: 120000
 }
 
 const ExecuteQuery = async (query) => {
