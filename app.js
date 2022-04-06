@@ -33,7 +33,8 @@ app.post('/GetUsers', async (req, res) => {
             a.UserID,
             CONCAT(b.LastName,', ',b.FirstName,' ',b.MiddleName) AS [Name],
             CONVERT(varchar(50),b.BirthDate,23) AS [BirthDate],
-            b.Gender
+            b.Gender,
+            CONVERT(int,ROUND(DATEDIFF(hour,b.BirthDate,GETDATE())/8766.0,0)) AS [Age]
         FROM AWSLINK.Workfromhome.dbo.WorkfromhomeWebcam a
         LEFT JOIN EmpMaster_Copy b
             ON a.UserID = b.UserID
